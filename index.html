@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VoTV Hints</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface-hover: #222633;
+      --border: #2e3345;
+      --text: #e4e6ef;
+      --muted: #8b90a5;
+      --accent: #7c9cff;
+      --accent-dim: #5a72c4;
+      --success: #6bcf8a;
+      --spoiler-bg: #141822;
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 2rem 1.5rem 1rem;
+      max-width: 720px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+
+    header h1 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 0.35rem;
+    }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    .category {
+      margin-bottom: 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s;
+    }
+
+    .category-header:hover {
+      background: var(--surface-hover);
+    }
+
+    .category-heading {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .category-header h2 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .category-header p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    .category-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+      padding-top: 0.05rem;
+    }
+
+    .category-count {
+      font-size: 0.72rem;
+      color: var(--muted);
+      background: var(--spoiler-bg);
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+    }
+
+    .category.open .category-chevron {
+      transform: rotate(90deg);
+    }
+
+    .category-body {
+      display: none;
+      padding: 0 0.75rem 0.75rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .category.open .category-body {
+      display: block;
+    }
+
+    .event {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 0.6rem;
+      overflow: hidden;
+    }
+
+    .event-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s;
+    }
+
+    .event-header:hover {
+      background: var(--surface-hover);
+    }
+
+    .event-title {
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .event-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .step-count {
+      font-size: 0.72rem;
+      color: var(--muted);
+      background: var(--spoiler-bg);
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+    }
+
+    .chevron {
+      color: var(--muted);
+      font-size: 0.75rem;
+      transition: transform 0.2s;
+    }
+
+    .event.open .chevron {
+      transform: rotate(90deg);
+    }
+
+    .event-body {
+      display: none;
+      padding: 0 1rem 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .event.open .event-body {
+      display: block;
+    }
+
+    .steps {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .step {
+      background: var(--spoiler-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .step-label {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-dim);
+      padding: 0.55rem 0.75rem 0.35rem;
+    }
+
+    .step-reveal {
+      position: relative;
+      min-height: 2.75rem;
+      cursor: ew-resize;
+      touch-action: none;
+      user-select: none;
+      --reveal: 0%;
+    }
+
+    .step-content {
+      padding: 0.65rem 0.75rem;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    .step-cover {
+      position: absolute;
+      inset: 0;
+      left: var(--reveal);
+      background: var(--spoiler-bg);
+      border-left: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 0.75rem;
+      pointer-events: none;
+    }
+
+    .step-reveal:not([data-reveal-pct="0"]) .step-cover {
+      border-left-color: var(--accent-dim);
+    }
+
+    .step-cover-hint {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    .step-reveal:not([data-reveal-pct="0"]) .step-cover-hint,
+    .step-reveal.is-dragging .step-cover-hint {
+      display: none;
+    }
+
+    .step-handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: var(--reveal);
+      width: 14px;
+      margin-left: -7px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: ew-resize;
+    }
+
+    .step-handle:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: -2px;
+    }
+
+    .step-handle-grip {
+      width: 4px;
+      height: 1.6rem;
+      background: var(--accent);
+      border-radius: 2px;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
+    }
+
+    .step-reveal[data-reveal-pct="0"] .step-handle-grip {
+      background: var(--accent-dim);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--accent-dim);
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="page-title">Time Event Hints</h1>
+    <p id="page-subtitle"></p>
+  </header>
+
+  <main id="app"></main>
+
+  <footer>
+    Data from
+    <a id="source-link-events" href="#" target="_blank" rel="noopener">Time Events</a> and
+    <a id="source-link-entities" href="#" target="_blank" rel="noopener">Forbiddens</a>
+    on the Voices of the Void Wiki.
+    Edit the <code>event-data</code> block at the bottom of this file to update hints.
+  </footer>
+
+  <!-- ========== EVENT DATA — edit below ========== -->
+  <script id="event-data" type="application/json">
+{
+  "meta": {
+    "title": "Voices of the Void — Hints",
+    "subtitle": "Spoiler-free guide. Sections and entries start collapsed — slide each hint open to peek.",
+    "sourceEvents": "https://voicesofthevoid.wiki.gg/wiki/Events/Time-Related",
+    "sourceEntities": "https://voicesofthevoid.wiki.gg/wiki/Entities/Forbiddens"
+  },
+  "categories": [
+    {
+      "id": "real-life-time",
+      "label": "Real-Life Time",
+      "description": "Events tied to your computer's real-world date or clock."
+    },
+    {
+      "id": "in-game-time",
+      "label": "In-Game Time",
+      "description": "Events tied to the in-game clock (not Story Mode or Ariral Reputation)."
+    },
+    {
+      "id": "3am-events",
+      "label": "3 AM Events",
+      "description": "Witching-hour events around 03:00, 03:30, or 03:33 in-game."
+    },
+    {
+      "id": "forbiddens",
+      "label": "Forbiddens",
+      "description": "Non-canon entities — rare, brief, and often only spotted via recordings or dedicated hunting."
+    }
+  ],
+  "events": [
+    {
+      "id": "bad-sun",
+      "category": "real-life-time",
+      "code_name": "Bad sun",
+      "steps": [
+        "Thats not the sun",
+        "random event tied to calendar day guaranteed on the 24th randome chance any in-game day",
+        "The sun appears covered by a black censorship box. Your gaze is pulled toward it; standing in sunlight (even through windows) rapidly damages you. Hazmat does not help."
+      ]
+    },
+    {
+      "id": "teleporting-shadows",
+      "category": "real-life-time",
+      "code_name": "June shadows",
+      "steps": [
+        "once per year june 28th",
+        "shadowy invaders",
+        "at 9pm shadows will appear"
+      ]
+    },
+    {
+      "id": "screaming-corpses",
+      "category": "real-life-time",
+      "code_name": "November Wail",
+      "steps": [
+        "A one-night-only spectacle tied to late November on your real calendar.",
+        "Trigger: November 29th at 11:00 PM real time. Cannot be forced by changing your device date.",
+        "Many corpses appear around you and scream. Harmless, no Meta Paranoia. They despawn shortly after."
+      ]
+    },
+    {
+      "id": "april-fools",
+      "category": "real-life-time",
+      "code_name": "Aprils fools",
+      "steps": [
+        "get pranked",
+        "random bullshit april  1st",
+        "dont drive"
+      ]
+    },
+    {
+      "id": "halloween",
+      "category": "real-life-time",
+      "code_name": "Halloween",
+      "steps": [
+        "Pumpkin flavoured seasonal atmosphere",
+        "October 29th through November 2nd",
+        "Halloween-themed changes apply across the map"
+      ]
+    },
+    {
+      "id": "christmas",
+      "category": "real-life-time",
+      "code_name": "Winter Festivity",
+      "steps": [
+        "Christmas-themed",
+        "December 5th through January 23rd",
+        "santa come only for people that prepares a nice christmas tree",
+        "santa comes only for kids that go early to bed",
+        "Krampus comes only for kids that stay up late",
+        "yes santa comes before 3",
+        "sleep before midnight wake up before 3"
+      ]
+    },
+    {
+      "id": "easter",
+      "category": "real-life-time",
+      "code_name": "Easter",
+      "steps": [
+        "Easter egg hunt",
+        "sometime in April through May 14th",
+        "12 Eggs",
+        "Do NOT throw 7 carrots down the old well near TR1",
+        "Egg locations in next hint",
+        "[ X:104.4 / Y:444.4 ]\n[ X:358.7 / Y:418.5 ]\n[ X:-667.6 / Y:-577.9 ]\n[ X:655.0 / Y:-588.2 ]\n[ X:-6.0 / Y:1.6 ]\n[ X:-376.9 / Y:696.9 ]\n[ X:-400.5 / Y:-478.9 ]\n[ X:-558.4 / Y:-41.3 ]\n[ X:5.8 / Y:-340.5 ]\n[ X:0.3 / Y:-470.1 ]\n[ X:651.6 / Y:71.7 ]\n[ X:-699.6 / Y:699.6 ]"
+      ]
+    },
+    {
+      "id": "satellite-graffiti",
+      "category": "in-game-time",
+      "code_name": "Satellite Graffiti",
+      "steps": [
+        "between 23:00 and 02:00",
+        "Uniform's concrete foundation",
+        "Graffiti depicting a demonic sigil will appear on the side of Uniform's concrete foundation"
+      ]
+    },
+    {
+      "id": "green-fire",
+      "category": "in-game-time",
+      "code_name": "Green Fire",
+      "steps": [
+        "Day 8+, between 00:00 - 01:00",
+        "Abandoned Village",
+        "You could try to put it out",
+        "Fire Extinguisher",
+        "coords next hint",
+        "[ X:680 / Y:-573.62 ]",
+        "Strat hint next",
+        "One strategy for safely extinguishing the fire is to arrive during the day and nail a fire extinguisher in place beforehand, with the top of the extinguisher facing where the fire will be. Then when you return at night, damaging the fire extinguisher will cause foam to spray out the top directly into the fire, without the player needing to be near it."
+      ]
+    },
+    {
+      "id": "teleporter-logs",
+      "category": "in-game-time",
+      "code_name": "Teleporter Logs",
+      "steps": [
+        "In-game 06:00–07:00",
+        "Two fallen logs become linked teleportation portals for a short morning window",
+        "locations next hint",
+        "One log sits near Transformer 1; the other on the mountain above The Cave."
+      ]
+    },
+    {
+      "id": "abandoned-shack-portal",
+      "category": "3am-events",
+      "code_name": "Smoke in the Shack",
+      "steps": [
+        "Between 03:30 - 03:40",
+        "Black smoke rises from a bush",
+        "Abandoned Shack",
+        "walk through the smoke",
+        "I should have brought my elemental runes",
+        "Upon walking into the smoke, the player will be teleported to a floating island in a dark void,",
+        "Lambert Plush (guide next hints until the end heavy spoilers)",
+        "The Lambert plush is obtained via a very complicated ritual.",
+        "Collect all four elemental runes obtained via their own separate rituals.",
+        "Enter a portal in the Abandoned Shack between 03:30 and 03:40.",
+        "Place each of the four runes into the empty receptacles surrounding the pentagram:",
+        "In order from left to right: Water, Fire, Air, Earth.",
+        "Take the ritual knife from the altar, and press RMB while holding it to remove a chunk of flesh from the player.",
+        "If done correctly, the Lambert plush will appear.",
+        "Jump off any of the platforms into the void. The player will be teleported above one of the graves"
+      ]
+    },
+    {
+      "id": "bunker-elevator-camera",
+      "category": "3am-events",
+      "code_name": "Bunker Surveilance",
+      "steps": [
+        "was this camera there before?",
+        "Refreshing your camera list at the wrong hour may show something that shouldn't be there",
+        "reload the camera list on the Main Computer between in-game 03:00–04:00.",
+        "A camera with a random-character name shows an elevator",
+        "Alpha Hideout, bring a hook",
+        "To enter the player must use a hook to retrieve the Keycard visible through a slot located on the sloped back section of the entrance",
+        "The second door can be unlocked through use of a Password Changer or forcefully opened with a melee weapon"
+      ]
+    },
+    {
+      "id": "furfur-toilet-jumpscare",
+      "category": "3am-events",
+      "code_name": "Furfur Toilet Jumpscare",
+      "steps": [
+        "Using indoor plumbing at a cursed minute can invite an unwelcome guest",
+        "Trigger: use any bathroom toilet at exactly in-game 03:33"
+      ]
+    },
+    {
+      "id": "porta-potty-poop-dimension",
+      "category": "3am-events",
+      "code_name": "Poop Dimension",
+      "steps": [
+        "Porta Potty Poop Dimension",
+        "Use the porta potty toilet by Transformer 1 between in-game 03:30–03:40"
+      ]
+    },
+    {
+      "id": "meat-locker-glows-red",
+      "category": "3am-events",
+      "code_name": "Meat Locker",
+      "steps": [
+        "The basement meat locker behaves strangely if you visit at the witching minute",
+        "Enter the Basement at 03:33.",
+        "The meat locker can be seen glowing red for a few seconds before it suddenly stops"
+      ]
+    },
+    {
+      "id": "white-door-opens",
+      "category": "3am-events",
+      "code_name": "The White Door Opens",
+      "steps": [
+        "random red dot on radar",
+        "its a closed wite door",
+        "may open at a specific time",
+        "In-game 03:00–04:00"
+      ]
+    },
+    {
+      "id": "foxtrot-depths",
+      "category": "3am-events",
+      "code_name": "Foxtrot Depths",
+      "steps": [
+        "Foxtrot's base wall",
+        "In-game 03:00–04:00 while the wall section is unobserved",
+        "Break the wall",
+        "Floor below is also breakable"
+      ]
+    },
+    {
+      "id": "romeo-cries",
+      "category": "3am-events",
+      "code_name": "Romeo Cries",
+      "steps": [
+        "Between 03:00 - 04:00",
+        "southeastern corner of Romeo's concrete foundation"
+      ]
+    },
+    {
+      "id": "bridge-sob",
+      "category": "3am-events",
+      "code_name": "Bridge Sob",
+      "steps": [
+        "03:33",
+        "is someone crying?",
+        "location next hint",
+        "Around the bridge located at [ X:120.00 / Y:-110.00 ]"
+      ]
+    },
+    {
+      "id": "blinking-lights",
+      "category": "3am-events",
+      "code_name": "Blinking Lights",
+      "steps": [
+        "Between 03:30 - 03:40.",
+        "must be a power outtage",
+        "location next hint",
+        "[ X:-460.00 / Y:460.00 ]"
+      ]
+    },
+    {
+      "id": "grave-zombies",
+      "category": "3am-events",
+      "code_name": "Disturbed Rest",
+      "steps": [
+        "let the dead rest",
+        "Digging at the wrong hour can wake the dead — briefly",
+        "location next hint",
+        "~X:-347 / Y:-563"
+      ]
+    },
+    {
+      "id": "server-critical-error",
+      "category": "3am-events",
+      "code_name": "Server Critical Error",
+      "steps": [
+        "shouldnt be working at this hours",
+        "Attempt to repair a server at 03:33."
+      ]
+    },
+    {
+      "id": "hallway-white-door",
+      "category": "3am-events",
+      "code_name": "Saved at :33",
+      "steps": [
+        "has to do with save and load",
+        "Load a save slot that was saved at in-game 03:33",
+        "upstairs hallway by the bedroom",
+        "that is a lot of misterious white doors"
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "the-looker",
+      "category": "forbiddens",
+      "code_name": "The Looker",
+      "steps": [
+        "Something watches through the signals — with no body anyone has seen.",
+        "Story Mode days 28–29: appears in five signals. Also rarely in random signals (e.g. near Stonehenge).",
+        "One signal puts it inside a locker. You are warned: do not look into the locker.",
+        "Open the left-most locker with an unobstructed view inside → game crash."
+      ]
+    },
+    {
+      "id": "corpsewalker",
+      "category": "forbiddens",
+      "code_name": "Corpsewalker",
+      "steps": [
+        "A Dark Figura that flickers at the edge of vision.",
+        "Random chance.",
+        "Visible for about 1–2 frames, then invisible. Trackable via EMF. Easier to spot at low framerates."
+      ]
+    },
+    {
+      "id": "chime-guy",
+      "category": "forbiddens",
+      "code_name": "Chime Guy",
+      "steps": [
+        "A figure with a briefcase and umbrella, announced by windchimes.",
+        "Random chance during rainstorms. Guaranteed when returning the Briefcase to the Out-of-Bounds Staircase.",
+        "Does not move; vanishes shortly after being looked at.",
+        "If summoned at the staircase: floats toward you. Contact → colorful grid corruption effect → crash."
+      ]
+    },
+    {
+      "id": "the-fridge",
+      "category": "forbiddens",
+      "code_name": "The Fridge",
+      "steps": [
+        "Something out of bounds never stops chasing you.",
+        "Always exists out of bounds.",
+        "Cannot enter the world border — only a threat while OOB.",
+        "On reach: becomes visible via shadow, freezes the game, then crashes. Inspired by The Freezer from Saints Row 2."
+      ]
+    },
+    {
+      "id": "friends-from-the-past",
+      "category": "forbiddens",
+      "code_name": "Friends from the Past",
+      "steps": [
+        "A shadow that only appears when light hits the right spot.",
+        "Shine a light source at a certain position on Oscar (satellite dish).",
+        "Shadow of a hanged figure on the metal stairs. Flashlight reveals it differently from other light sources."
+      ]
+    },
+    {
+      "id": "forbidden-teleporting-shadows",
+      "category": "forbiddens",
+      "code_name": "Teleporting Shadows",
+      "steps": [
+        "Blocky shadows that teleport — even while paused.",
+        "June 28th, 9:00 PM real time.",
+        "Rushes to you, circles for ~15 seconds, then vanishes. Any game mode, even title screen."
+      ]
+    },
+    {
+      "id": "black-sphere",
+      "category": "forbiddens",
+      "code_name": "Black Sphere",
+      "steps": [
+        "A vibrating dark orb in the woods at night.",
+        "Random chance at night in the woods around Stonehenge.",
+        "Deep bass sound, then flashes Standard Galactic Alphabet runes spelling \"PLACEHOLDER\"."
+      ]
+    },
+    {
+      "id": "the-white-door",
+      "category": "forbiddens",
+      "code_name": "The White Door",
+      "steps": [
+        "A closed white door — red dot on radar.",
+        "Random chance spawn.",
+        "Opens between 03:00–03:59, revealing a black/white/gray hallway and distant white light.",
+        "Too close → slams shut. Remote cameras or thrown items also close it. Can be climbed."
+      ]
+    },
+    {
+      "id": "the-cognition",
+      "category": "forbiddens",
+      "code_name": "The Cognition",
+      "steps": [
+        "Like the Insomniac — but without eyes.",
+        "0.01% chance to replace the Insomniac.",
+        "Does not change transparency. On grab → white void with metal chair and distant wood cabin → crash after a variable time.",
+        "Christmas event: present may appear next to the chair."
+      ]
+    },
+    {
+      "id": "window-bat",
+      "category": "forbiddens",
+      "code_name": "Window Bat",
+      "steps": [
+        "Something pressed against the signal room window — for a few frames.",
+        "Randomly, after moving bones from the old box into the emergency shower.",
+        "Bat skeleton appearance. Mostly seen at night when looking at the window."
+      ]
+    },
+    {
+      "id": "red-skeleton",
+      "category": "forbiddens",
+      "code_name": "Red Skeleton",
+      "steps": [
+        "Floating skull, spine, and ribcage — always crying nearby.",
+        "Random spawn; chance rises with skulls placed in the emergency shower.",
+        "May wake you with an \"escape\" error while sleeping (no Meta Paranoia after).",
+        "Chases fast, passes through walls, gains speed. In pause menu: pulls cursor to Resume.",
+        "On catch: ragdoll loop, red screen, roar. Skulls teleport to radio tower top. Haunting visions follow until save/reload."
+      ]
+    },
+    {
+      "id": "censor-guy",
+      "category": "forbiddens",
+      "code_name": "Censor Guy",
+      "steps": [
+        "A censored humanoid seen through walls — even in the pause menu.",
+        "Play continuously for 6 hours.",
+        "Spawns far away, runs closer with footsteps. Circles/strafes at a set distance. Phases through doors, windows, servers.",
+        "Touch → colorful grid effect → crash. After a few minutes, runs away and despawns. Invisible to digital camera."
+      ]
+    },
+    {
+      "id": "the-walker",
+      "category": "forbiddens",
+      "code_name": "The Walker",
+      "steps": [
+        "Walks through walls toward you — speed tied to your FPS.",
+        "Rare random spawn after 4+ hours continuous play. Higher chance after 6 hours.",
+        "No Meta Paranoia. Visible through everything including menus. HL2 ambient sounds play.",
+        "Contact → colorful grid → crash. Loading a save despawn it instantly."
+      ]
+    },
+    {
+      "id": "the-exit-door",
+      "category": "forbiddens",
+      "code_name": "The Exit Door",
+      "steps": [
+        "Like the White Door — but frameless, and it comes to you.",
+        "Play continuously for 12 hours.",
+        "Floats toward player, phases through obstacles, moves while paused.",
+        "On reach → crash. Spawns at [ X:1000.00 / Y:1000.00 ] at your elevation."
+      ]
+    },
+    {
+      "id": "mountain-people",
+      "category": "forbiddens",
+      "code_name": "Mountain People",
+      "steps": [
+        "Three spindly silhouettes on the mountain beyond the border.",
+        "Spawn conditions unknown. RNG is a small part; not IRL-time dependent; staring won't force it.",
+        "Visible atop the mountain beyond the invisible border, next to the lone tree.",
+        "Vanish the instant they are no longer observed (by any means)."
+      ]
+    },
+    {
+      "id": "siren-pole",
+      "category": "forbiddens",
+      "code_name": "Siren Pole",
+      "steps": [
+        "Always out there — if you're not in Sandbox.",
+        "Always spawns when gamemode is not Sandbox.",
+        "Northeast corner of the map, far out of bounds.",
+        "Teleports short distances when unobserved. Cannot move while watched through a camera."
+      ]
+    },
+    {
+      "id": "the-bone-man",
+      "category": "forbiddens",
+      "code_name": "The Bone Man",
+      "steps": [
+        "A skeleton with an encrypted note about bones.",
+        "Found at [ X:-1907.72 / Y:1731.19 ]",
+        "Note repeats encrypted text about \"bones of void…\" Reportedly has an unseen event."
+      ]
+    },
+    {
+      "id": "shadow-spider",
+      "category": "forbiddens",
+      "code_name": "Shadow Spider",
+      "steps": [
+        "A dark shape with six arms — one frame in the Tutorial.",
+        "Random chance in the first room of the Tutorial.",
+        "Also known as Tutorial Spider. Appears one frame then despawns."
+      ]
+    },
+    {
+      "id": "poolwalker",
+      "category": "forbiddens",
+      "code_name": "Poolwalker",
+      "steps": [
+        "Footsteps and splashes — but nobody visible.",
+        "Random chance in the Tutorial or main map.",
+        "Mimics player footsteps; splashes in water. Opens doors, pushes props. Vanishes when you look its way."
+      ]
+    },
+    {
+      "id": "the-head",
+      "category": "forbiddens",
+      "code_name": "The Head",
+      "steps": [
+        "A disfigured Ariral head that buzzes and crashes the game.",
+        "Get out of bounds in gm_construct, or rare random chance.",
+        "Empty popup (\"\") on spawn — also appears in dreams, not always The Head.",
+        "Usually chases and crashes. Rarely spawns inside you for a few frames without crashing."
+      ]
+    },
+    {
+      "id": "false-kel",
+      "category": "forbiddens",
+      "code_name": "False Kel",
+      "steps": [
+        "Kel — but wrong.",
+        "Leave the mirror room in gm_construct after 1–2 minutes.",
+        "Exact Kel copy runs to a corner building. Too close → crash. Passes through everything."
+      ]
+    },
+    {
+      "id": "eight-great-figures",
+      "category": "forbiddens",
+      "code_name": "The Eight Great Figures",
+      "steps": [
+        "Eight black figures in the gm_construct sky.",
+        "Place four body bags around the water bottle at [ X:-65.12 / Y:-24.57 ]. Find all 7 skulls. Interact with the bloody skull.",
+        "Sky turns to static; HL2 Citadel ambience. One figure has a red orb near its head.",
+        "Map goes pitch black; laughing; all figures gain glowing orbs → game force-closes."
+      ]
+    }
+  ]
+}
+  </script>
+
+  <script>
+    const app = document.getElementById('app');
+    const data = JSON.parse(document.getElementById('event-data').textContent);
+
+    document.getElementById('page-title').textContent = data.meta.title;
+    document.getElementById('page-subtitle').textContent = data.meta.subtitle;
+    document.getElementById('source-link-events').href = data.meta.sourceEvents;
+    document.getElementById('source-link-entities').href = data.meta.sourceEntities;
+
+    const allItems = [
+      ...(data.events || []),
+      ...(data.entities || []),
+    ];
+
+    const byCategory = Object.fromEntries(
+      data.categories.map((c) => [c.id, { ...c, items: [] }])
+    );
+    for (const item of allItems) {
+      if (byCategory[item.category]) {
+        byCategory[item.category].items.push(item);
+      }
+    }
+
+    app.innerHTML = data.categories
+      .map((cat) => {
+        const group = byCategory[cat.id];
+        if (!group.items.length) return '';
+        return `
+          <section class="category" id="${cat.id}">
+            <div class="category-header" role="button" tabindex="0" aria-expanded="false">
+              <div class="category-heading">
+                <h2>${escapeHtml(cat.label)}</h2>
+                <p>${escapeHtml(cat.description)}</p>
+              </div>
+              <span class="category-meta">
+                <span class="category-count">${group.items.length} entries</span>
+                <span class="chevron category-chevron">▶</span>
+              </span>
+            </div>
+            <div class="category-body">
+              ${group.items.map(renderItem).join('')}
+            </div>
+          </section>`;
+      })
+      .join('');
+
+    app.querySelectorAll('.category-header').forEach((header) => {
+      const toggle = () => {
+        const section = header.closest('.category');
+        const open = section.classList.toggle('open');
+        header.setAttribute('aria-expanded', open ? 'true' : 'false');
+      };
+      header.addEventListener('click', toggle);
+      header.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggle();
+        }
+      });
+    });
+
+    app.querySelectorAll('.event-header').forEach((header) => {
+      header.addEventListener('click', (e) => {
+        e.stopPropagation();
+        header.closest('.event').classList.toggle('open');
+      });
+    });
+
+    app.querySelectorAll('.step-reveal').forEach(initRevealSlider);
+
+    function renderRevealBlock(label, contentHtml) {
+      return `
+        <li class="step">
+          <div class="step-label">${escapeHtml(label)}</div>
+          <div class="step-reveal" data-reveal-pct="0" style="--reveal: 0%">
+            <div class="step-content">${contentHtml}</div>
+            <div class="step-cover" aria-hidden="true">
+              <span class="step-cover-hint">Slide to peek →</span>
+            </div>
+            <div class="step-handle" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="${escapeHtml(label)}" tabindex="0">
+              <span class="step-handle-grip" aria-hidden="true"></span>
+            </div>
+          </div>
+        </li>`;
+    }
+
+    function renderItem(item) {
+      const steps = item.steps
+        .map((text, i) => renderRevealBlock(`Hint ${i + 1}`, escapeHtml(text)))
+        .join('');
+
+      return `
+        <article class="event" id="${item.id}">
+          <div class="event-header">
+            <span class="event-title">${escapeHtml(item.code_name)}</span>
+            <span class="event-meta">
+              <span class="step-count">${item.steps.length} hints</span>
+              <span class="chevron">▶</span>
+            </span>
+          </div>
+          <div class="event-body">
+            <ol class="steps">${steps}</ol>
+          </div>
+        </article>`;
+    }
+
+    function initRevealSlider(el) {
+      let dragging = false;
+
+      const setReveal = (pct) => {
+        const clamped = Math.max(0, Math.min(100, pct));
+        el.style.setProperty('--reveal', `${clamped}%`);
+        el.dataset.revealPct = String(Math.round(clamped));
+        el.querySelector('.step-handle').setAttribute('aria-valuenow', String(Math.round(clamped)));
+      };
+
+      const pctFromClientX = (clientX) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.width <= 0) return 0;
+        return ((clientX - rect.left) / rect.width) * 100;
+      };
+
+      const onPointerDown = (e) => {
+        if (e.button !== undefined && e.button !== 0) return;
+        e.preventDefault();
+        e.stopPropagation();
+        dragging = true;
+        el.classList.add('is-dragging');
+        el.setPointerCapture(e.pointerId);
+        setReveal(pctFromClientX(e.clientX));
+      };
+
+      const onPointerMove = (e) => {
+        if (!dragging) return;
+        e.preventDefault();
+        setReveal(pctFromClientX(e.clientX));
+      };
+
+      const endDrag = (e) => {
+        if (!dragging) return;
+        dragging = false;
+        el.classList.remove('is-dragging');
+        if (el.hasPointerCapture(e.pointerId)) {
+          el.releasePointerCapture(e.pointerId);
+        }
+      };
+
+      el.addEventListener('pointerdown', onPointerDown);
+      el.addEventListener('pointermove', onPointerMove);
+      el.addEventListener('pointerup', endDrag);
+      el.addEventListener('pointercancel', endDrag);
+
+      const handle = el.querySelector('.step-handle');
+      handle.addEventListener('keydown', (e) => {
+        const current = Number(el.dataset.revealPct || 0);
+        let next = current;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowUp') next = current + 5;
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') next = current - 5;
+        if (e.key === 'Home') next = 0;
+        if (e.key === 'End') next = 100;
+        if (next === current) return;
+        e.preventDefault();
+        e.stopPropagation();
+        setReveal(next);
+      });
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+</html>
