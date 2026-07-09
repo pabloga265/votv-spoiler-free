@@ -3213,8 +3213,16 @@
 
     const searchInput = document.getElementById('search');
 
+    function normalizeForSearch(text) {
+      return text
+        .toLowerCase()
+        .replace(/\bevents?\b/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
     function applySearch() {
-      const q = searchInput.value.trim().toLowerCase();
+      const q = normalizeForSearch(searchInput.value);
 
       for (const event of app.querySelectorAll('.event')) {
         if (!q) {
@@ -3225,10 +3233,10 @@
           continue;
         }
 
-        const title = (event.dataset.search || '').toLowerCase();
+        const title = normalizeForSearch(event.dataset.search || '');
         const titleMatch = title.includes(q);
         const anyHintMatch = [...event.querySelectorAll('.step')].some((step) =>
-          step.querySelector('.step-content').textContent.toLowerCase().includes(q)
+          normalizeForSearch(step.querySelector('.step-content').textContent).includes(q)
         );
         const showEvent = titleMatch || anyHintMatch;
 
