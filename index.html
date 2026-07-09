@@ -53,6 +53,30 @@
       margin-top: 0.35rem;
     }
 
+    .search-wrap {
+      margin: 1rem auto 0;
+      max-width: 320px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.55rem 0.75rem;
+      background: var(--spoiler-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+
+    .search-input::placeholder {
+      color: var(--muted);
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--accent-dim);
+    }
+
     main {
       max-width: 720px;
       margin: 0 auto;
@@ -312,13 +336,23 @@
   <header>
     <h1 id="page-title">Time Event Hints</h1>
     <p id="page-subtitle"></p>
+    <div class="search-wrap">
+      <input
+        type="search"
+        id="search"
+        class="search-input"
+        placeholder="Search hints…"
+        autocomplete="off"
+        spellcheck="false"
+      />
+    </div>
   </header>
 
   <main id="app"></main>
 
   <footer>
     Data from
-    <a id="source-link-events" href="#" target="_blank" rel="noopener">Time Events</a> and
+    <a id="source-link-events" href="#" target="_blank" rel="noopener">Events</a> and
     <a id="source-link-entities" href="#" target="_blank" rel="noopener">Entities</a>
     on the Voices of the Void Wiki.
     Edit the <code>event-data</code> block at the bottom of this file to update hints.
@@ -329,8 +363,8 @@
 {
   "meta": {
     "title": "Voices of the Void — Hints",
-    "subtitle": "Spoiler-free guide for time events and entities. Sections and entries start collapsed — slide each hint open to peek.",
-    "sourceEvents": "https://voicesofthevoid.wiki.gg/wiki/Events/Time-Related",
+    "subtitle": "Spoiler-free guide for VoTV events and entities. Time-related, story, random, signals, dreams, reputation, and more — slide each hint open to peek.",
+    "sourceEvents": "https://voicesofthevoid.wiki.gg/wiki/Events",
     "sourceEntities": "https://voicesofthevoid.wiki.gg/wiki/Entities"
   },
   "categories": [
@@ -348,6 +382,46 @@
       "id": "3am-events",
       "label": "3 AM Events",
       "description": "Witching-hour events around 03:00, 03:30, or 03:33 in-game."
+    },
+    {
+      "id": "story-mode",
+      "label": "Story Mode",
+      "description": "Welcome to the Array. Fixed-day events on every Story Mode save (ends Day 48 as of 0.9.0)."
+    },
+    {
+      "id": "random-events",
+      "label": "Random Events",
+      "description": "The sky turns red... Ungated events that can strike at almost any moment."
+    },
+    {
+      "id": "signal-events",
+      "label": "Signal Events",
+      "description": "Take me home. Triggered by downloading, playing, or processing specific signals."
+    },
+    {
+      "id": "dreams",
+      "label": "Dreams",
+      "description": "No sleep. Minigame nightmares while Kel sleeps — or when something grabs him."
+    },
+    {
+      "id": "ariral-reputation",
+      "label": "Ariral Reputation",
+      "description": "Who's here with me? Story-mode pranks and gifts from the visiting Arirals — tier depends on reputation."
+    },
+    {
+      "id": "player-activated",
+      "label": "Player-Activated",
+      "description": "Death Won't Stop Work. Consequences you trigger yourself — often by accident."
+    },
+    {
+      "id": "endings",
+      "label": "Endings",
+      "description": "...the end is near... Game-over scenarios. Reload returns you to your last save."
+    },
+    {
+      "id": "console-commands",
+      "label": "Console Commands",
+      "description": "Secret base-console commands that spawn jokes, minigames, or chaos."
     },
     {
       "id": "extraterrestrials",
@@ -650,6 +724,1497 @@
         "Load a save slot that was saved at in-game 03:33",
         "upstairs hallway by the bedroom",
         "that is a lot of misterious white doors"
+      ]
+    },
+    {
+      "id": "meteor-shower",
+      "category": "story-mode",
+      "code_name": "Meteor Shower",
+      "steps": [
+        "Story Mode — Day 2 at 00:17",
+        "A meteor shower fills the night sky for about two real-life minutes (sped up if you are sleeping)."
+      ]
+    },
+    {
+      "id": "power-outage",
+      "category": "story-mode",
+      "code_name": "Power Outage",
+      "steps": [
+        "Story Mode — Day 4 at 00:11",
+        "All basement breaker switches flip off at once; flip them back on. Extra fireflies may appear around base."
+      ]
+    },
+    {
+      "id": "vent-crawler",
+      "category": "story-mode",
+      "code_name": "Vent Crawler",
+      "steps": [
+        "Story Mode — Day 5 at 23:28 (stand at Main Computer)",
+        "Meta Paranoia until you face the main PC. Something crawls over the vent grate, knocks it loose, and scurries away — you can then climb into the vents."
+      ]
+    },
+    {
+      "id": "ariral-peace-signal",
+      "category": "story-mode",
+      "code_name": "Ariral Peace Signal",
+      "steps": [
+        "Story Mode — Day 6 from 23:00 (ping a new signal)",
+        "Next ping is guaranteed peace signal (single warp arrow). At L3, garbled audio of an Ariral saying \"We come in peace.\" Unique — cannot be found again once saved."
+      ]
+    },
+    {
+      "id": "ariral-picnic",
+      "category": "story-mode",
+      "code_name": "Ariral Picnic",
+      "steps": [
+        "Story Mode — Day 8 at 00:45",
+        "Two warp arrows and a picnic appear in the valley between Sierra and Romeo. Ships cloak when approached; invisible Ariral may observe you. Items affect reputation. Sierra & Romeo servers go down at 01:45. Everything vanishes Day 10 at 00:01."
+      ]
+    },
+    {
+      "id": "no-more-birds",
+      "category": "story-mode",
+      "code_name": "No More Birds",
+      "steps": [
+        "Story Mode — Day 9 onward (also other modes on their schedules)",
+        "All forest birds flee permanently and stop appearing in ambient singing. Also Infinite/Sandbox Day 9, Ambience Day 1, Solar Day 2."
+      ]
+    },
+    {
+      "id": "wormhole-signal",
+      "category": "story-mode",
+      "code_name": "Wormhole Signal",
+      "steps": [
+        "Story Mode — Day 9 from 18:00 (ping a new signal)",
+        "Next ping is guaranteed wh signal showing a hollow construct around a black hole. L3 audio: mechanical drone + last five minutes of Caretaker's \"Place in the World Fades Away.\" Unique; 3rd-largest signal in the game."
+      ]
+    },
+    {
+      "id": "arirals-talk-signal",
+      "category": "story-mode",
+      "code_name": "Arirals Talk Signal",
+      "steps": [
+        "Story Mode — Day 11 from 00:00 (ping a new signal)",
+        "Next ping is guaranteed arirstalk (two warp arrows). L3 is garbled Ariral conversation in alien language. Unique once saved."
+      ]
+    },
+    {
+      "id": "arirals-eating-shrimp",
+      "category": "story-mode",
+      "code_name": "Arirals Eating Shrimp",
+      "steps": [
+        "Story Mode — Day 12 onward (all modes on Day 12)",
+        "Visitors eat all shrimp packs left outside containers when you are not looking. They only stop at Loyal reputation tier with all three — Good is not enough."
+      ]
+    },
+    {
+      "id": "vent-knocker",
+      "category": "story-mode",
+      "code_name": "Vent Knocker",
+      "steps": [
+        "Story Mode — Day 12 at 00:39 (stand at Main Computer)",
+        "Meta Paranoia until you face the main PC. Loud banging in vents above the Server Network Room, then stops."
+      ]
+    },
+    {
+      "id": "ariral-cringe-comp-signal",
+      "category": "story-mode",
+      "code_name": "Ariral Cringe Comp Signal",
+      "steps": [
+        "Story Mode — Day 12 from 23:00 (ping a new signal)",
+        "Object signal of two Ariral warp arrows. L3 shows the signal room from outside the window plus alien caption text."
+      ]
+    },
+    {
+      "id": "email-spam-ariral-visit",
+      "category": "story-mode",
+      "code_name": "Email Spam & Ariral Visit",
+      "steps": [
+        "Story Mode — Day 13 at 00:00 (stand at Main Computer)",
+        "Spam emails spell OUTSIDE. Warp arrow visible from signal room; approaching outside teleports it away. Photo = +15 rep. Ship leaves ~06:49 if you stay inside."
+      ]
+    },
+    {
+      "id": "pink-wisp-swarm",
+      "category": "story-mode",
+      "code_name": "Pink Wisp Swarm",
+      "steps": [
+        "Story Mode — Day 14 at 19:18 (look away from radar)",
+        "Many pink wisps spawn across the array."
+      ]
+    },
+    {
+      "id": "sushi-gift-delivery",
+      "category": "story-mode",
+      "code_name": "Sushi Gift Delivery",
+      "steps": [
+        "Story Mode — Day 15 at 08:50",
+        "An order you did not place appears in the queue. Delivery drone brings sushi with a note from Ena and Max."
+      ]
+    },
+    {
+      "id": "flickering-lantern-prank",
+      "category": "story-mode",
+      "code_name": "Flickering Lantern Prank",
+      "steps": [
+        "Story Mode — Day 15 at 17:01",
+        "Radar pings at Hole buildings; flickering lantern upstairs with notepad. Touching notepad triggers Ariral door attack — shrimp pack blocks it. Lantern can be kept (permanent flicker, 950+ fuel)."
+      ]
+    },
+    {
+      "id": "ariral-treehouse",
+      "category": "story-mode",
+      "code_name": "Ariral Treehouse",
+      "steps": [
+        "Story Mode — Days 17–22 at 00:00",
+        "Arirals build a treehouse near Transformer 1 over five days. Victor server goes down on Days 17 and 20 to bait you over. See Ariral Reputation for interactions."
+      ]
+    },
+    {
+      "id": "anti-gravity-prank",
+      "category": "story-mode",
+      "code_name": "Anti-Gravity Prank",
+      "steps": [
+        "Story Mode — Day 17 at 01:01 (Physics Events on, stand near base)",
+        "Random transformer dies; cloaked warp arrow floats above base. All objects float upward ~2 in-game hours. First photo = +15 rep. Meta Paranoia until ship leaves."
+      ]
+    },
+    {
+      "id": "croissant-delivery",
+      "category": "story-mode",
+      "code_name": "Croissant Delivery",
+      "steps": [
+        "Story Mode — Day 20 at 08:50",
+        "Unordered delivery of 5 croissants via drone with a note from Ena."
+      ]
+    },
+    {
+      "id": "radio-tower-ariral-ship",
+      "category": "story-mode",
+      "code_name": "Radio Tower Ariral Ship",
+      "steps": [
+        "Story Mode — Day 20+ (random chance atop Radio Tower)",
+        "Ariral ship appears beside the tower briefly. Meta Paranoia until it leaves. Photos here do not grant reputation."
+      ]
+    },
+    {
+      "id": "dropped-ariral-gun",
+      "category": "story-mode",
+      "code_name": "Dropped Ariral Gun",
+      "steps": [
+        "Story Mode — Day 24 at 02:04 (enter garage)",
+        "Yowl outside, then a special gun and shrimp appear in the parking lot. Return gun to treehouse for rep or an Ariral retrieves it."
+      ]
+    },
+    {
+      "id": "brownie-trail",
+      "category": "story-mode",
+      "code_name": "Brownie Trail",
+      "steps": [
+        "Story Mode — Day 25 at 05:30 (enter garage)",
+        "Ariral lays a brownie trail to the treehouse; note contents and Kel doll depend on reputation. An Ariral may trash your base while you are away."
+      ]
+    },
+    {
+      "id": "warning-obelisk",
+      "category": "story-mode",
+      "code_name": "Warning Obelisk",
+      "steps": [
+        "Story Mode — Day 25 at 15:40 (near Signal Lab windows)",
+        "Obelisk falls at ~[80 / 1.75] — alarms sound, light objects flung. Approach for hologram warning. Trampoline at landing spot (Funny) = Return to Sender achievement."
+      ]
+    },
+    {
+      "id": "ariral-satellite-signals",
+      "category": "story-mode",
+      "code_name": "Ariral Satellite Signals",
+      "steps": [
+        "Story Mode — Day 26 from 11:00 (ping new signals)",
+        "Three similar Ariral satellite signals appear that day — download all three to resume normal pinging."
+      ]
+    },
+    {
+      "id": "black-hole-sun",
+      "category": "story-mode",
+      "code_name": "Black Hole Sun",
+      "steps": [
+        "Story Mode — Day 27 at 11:28",
+        "~1 minute of black sky, red ambient light, sun replaced by a black hole. Emails from Dr. Bao and garbled user message. Meta Paranoia throughout."
+      ]
+    },
+    {
+      "id": "looker-signals",
+      "category": "story-mode",
+      "code_name": "Looker Signals",
+      "steps": [
+        "Story Mode — Day 28 from 20:00 (ping new signals)",
+        "Series of live-feed signals closing in on you. Fourth is from inside a locker — do not look inside. Fifth auto-downloads from behind your head."
+      ]
+    },
+    {
+      "id": "piramid-signal",
+      "category": "story-mode",
+      "code_name": "Piramid Signal",
+      "steps": [
+        "Story Mode — Day 30 from 18:00 (ping a new signal)",
+        "Signal depicts a pyramid-shaped object in space. Downloading/playing it is not required for the Day 31 arrival event."
+      ]
+    },
+    {
+      "id": "piramid-arrival",
+      "category": "story-mode",
+      "code_name": "Piramid Arrival",
+      "steps": [
+        "Story Mode — Day 31 at 18:00 (stand in Signal Lab)",
+        "Huge Rozital walks the array collecting yellow wisps, then leaves. Meta Paranoia during first roar. Yellow wisps stop spawning afterward."
+      ]
+    },
+    {
+      "id": "rozital-scouts",
+      "category": "story-mode",
+      "code_name": "Rozital Scouts",
+      "steps": [
+        "Story Mode — Day 33 at 18:00",
+        "TR3 shuts off; tentacled Rozitals tour the array. Avoid scanning too long or they attack. Successful scan = peaceful exit near Victor. They attack Kerfur-Omegas."
+      ]
+    },
+    {
+      "id": "garage-soltomia",
+      "category": "story-mode",
+      "code_name": "Garage Soltomia",
+      "steps": [
+        "Story Mode — Day 35 at 19:00 (while inside base)",
+        "Soltomia Rozital enters through the drone hole and cleans the ATV. Doors jam until you open the garage — Rozital flees and drops a giant sponge."
+      ]
+    },
+    {
+      "id": "peeping-ufo",
+      "category": "story-mode",
+      "code_name": "Peeping UFO",
+      "steps": [
+        "Story Mode — Day 37 at 08:18 (stand at Main Computer)",
+        "UFO hovers near the garage until you physically spot it. Cameras do not make it leave."
+      ]
+    },
+    {
+      "id": "rozital-mothership",
+      "category": "story-mode",
+      "code_name": "Rozital Mothership",
+      "steps": [
+        "Story Mode — Day 38 at 11:01",
+        "Enormous rectangular Rozital ship slowly flies over the array — takes ~8 real-life minutes."
+      ]
+    },
+    {
+      "id": "hole-repair",
+      "category": "story-mode",
+      "code_name": "Hole Repair",
+      "steps": [
+        "Story Mode — Day 39 at 00:01 (stand at Main Computer)",
+        "Purple beams at the Hole; Rozitals repair it with a laser that vaporizes props and kills you on contact. Stand inside fence 3s to neutralize Kavotia. Catch the capsule for Yoink achievement. Resolves after 2 days if ignored."
+      ]
+    },
+    {
+      "id": "gray-drops-corpse",
+      "category": "story-mode",
+      "code_name": "Gray Drops Corpse",
+      "steps": [
+        "Story Mode — Day 40 at 23:12 (stand at Main Computer)",
+        "Flying saucers cross the array and drop an edible corpse near the main power block. Omega-Kerfurs disabled; lights flicker until saucers leave."
+      ]
+    },
+    {
+      "id": "gray-drops-corpse-window",
+      "category": "story-mode",
+      "code_name": "Gray Drops Corpse Near Window",
+      "steps": [
+        "Story Mode — Day 41 at 04:19 (stand at Main Computer)",
+        "Same saucer flyover as Day 40 but corpse drops in the parking lot at a different time."
+      ]
+    },
+    {
+      "id": "gray-drops-jeep",
+      "category": "story-mode",
+      "code_name": "Gray Drops Jeep",
+      "steps": [
+        "Story Mode — Day 42 at 22:29 (stand at Main Computer)",
+        "Flying saucers drop a jeep near base. Same Omega/light effects as prior Gray drop events. Hacksaw yields 22 metal scrap."
+      ]
+    },
+    {
+      "id": "grays-at-transformer",
+      "category": "story-mode",
+      "code_name": "Grays at Transformer",
+      "steps": [
+        "Story Mode — Day 43 at 17:01",
+        "TR3 forced off; restoring power spawns two Grays walking downhill. Too close = ragdoll and they vanish. Safe distance follow ~2 minutes."
+      ]
+    },
+    {
+      "id": "gray-firetank",
+      "category": "story-mode",
+      "code_name": "Gray Firetank",
+      "steps": [
+        "Story Mode — Day 44 at 18:02",
+        "TR1 forced off; saucers drop a flamethrower tank that chases you (replaced by a boar without Extreme Combat). Omegas disabled during spawn."
+      ]
+    },
+    {
+      "id": "gray-invasion",
+      "category": "story-mode",
+      "code_name": "Gray Invasion",
+      "steps": [
+        "Story Mode — Day 47 at 03:00",
+        "Over 90 minutes, boars and firetanks spawn on the Ariral Treehouse — Arirals defend. If the Ariral Gun was not returned, one Ariral fights unarmed."
+      ]
+    },
+    {
+      "id": "ariral-troll-drive",
+      "category": "random-events",
+      "code_name": "Ariral Troll Drive",
+      "steps": [
+        "A suspicious drive delivery.",
+        "Extremely rare when drone delivers or you insert a drive in playback.",
+        "Drive named like Ariral porno bait; contains L0 funny signal dated 2024.05.11."
+      ]
+    },
+    {
+      "id": "black-fog",
+      "category": "random-events",
+      "code_name": "Black Fog",
+      "steps": [
+        "In my restless dreams...",
+        "Random chance.",
+        "Brown-noise drone, opaque black fog, Prying Eyes roam. Mid-event → Meta Paranoia. Lasts ~2.5 in-game hours."
+      ]
+    },
+    {
+      "id": "cursed-church",
+      "category": "random-events",
+      "code_name": "Cursed Church",
+      "steps": [
+        "Church bells from nowhere.",
+        "Random chance.",
+        "Derelict church spawns randomly; bells heard map-wide. Barricaded — clipping inside crashes game."
+      ]
+    },
+    {
+      "id": "the-dialogue",
+      "category": "random-events",
+      "code_name": "The Dialogue",
+      "steps": [
+        "Chat notifications from nowhere.",
+        "Random chance.",
+        "Fake multiplayer chat about secrets — message cuts off mid-word."
+      ]
+    },
+    {
+      "id": "earth-shaking-roar",
+      "category": "random-events",
+      "code_name": "Earth Shaking Roar",
+      "steps": [
+        "Something roars.",
+        "Random chance.",
+        "Unknown entity roar shakes the area."
+      ]
+    },
+    {
+      "id": "empty-base",
+      "category": "random-events",
+      "code_name": "Empty Base",
+      "steps": [
+        "Where did everything go?",
+        "Random chance while inside base perimeter.",
+        "Teleported to unfurnished base floating in void ~1 minute or until you fall — respawn at Security Booth."
+      ]
+    },
+    {
+      "id": "eye-moon",
+      "category": "random-events",
+      "code_name": "Eye Moon",
+      "steps": [
+        "Keep looking up.",
+        "Random chance.",
+        "Moon replaced by an eye for one night."
+      ]
+    },
+    {
+      "id": "fossilhound-vs-boar-war",
+      "category": "random-events",
+      "code_name": "Fossilhound vs Boar War",
+      "steps": [
+        "A battle at the array.",
+        "Random night in signal room after Story Day 42.",
+        "30+ Gray boars vs Fossilhounds circle base and fight each other — never despawn."
+      ]
+    },
+    {
+      "id": "gears",
+      "category": "random-events",
+      "code_name": "Gears",
+      "steps": [
+        "Massive gears while you sleep.",
+        "Pre-0.7.0: random on sleep to 100% stamina.",
+        "Huge gears across array until you step outside. Vintage Story reference (creator hadn't played it)."
+      ]
+    },
+    {
+      "id": "geom-ovoid-roaming",
+      "category": "random-events",
+      "code_name": "Geom Ovoid Roaming",
+      "steps": [
+        "Living geometry at night.",
+        "Random chance at night.",
+        "Geom Ovoid descends and roams; approaches make it ascend."
+      ]
+    },
+    {
+      "id": "goat-skull-locker-jumpscare",
+      "category": "random-events",
+      "code_name": "Goat Skull Locker Jumpscare",
+      "steps": [
+        "Check the locker.",
+        "Random chance opening any locker.",
+        "Large goat skull inside — sound and quick fade."
+      ]
+    },
+    {
+      "id": "gore-locker",
+      "category": "random-events",
+      "code_name": "Gore Locker",
+      "steps": [
+        "Something in the meat locker?",
+        "Random chance.",
+        "Random base locker fills with flesh gibs and body parts; gibs may persist."
+      ]
+    },
+    {
+      "id": "gray-cloaking-panel",
+      "category": "random-events",
+      "code_name": "Gray Cloaking Panel",
+      "steps": [
+        "The sky is falling!",
+        "Random chance at night.",
+        "Strobing sky light intensifies until cloaking panel crashes into you — achievement. Panel can be carried; Use captures background image."
+      ]
+    },
+    {
+      "id": "kerfur-omega-scary-face",
+      "category": "random-events",
+      "code_name": "Kerfur-Omega Scary Face",
+      "steps": [
+        "COME A LITTLE CLOSER",
+        "Random chance when not looking at Kerfur-Omega.",
+        "Glance at Omega → scary face flash for a split second."
+      ]
+    },
+    {
+      "id": "lake-event",
+      "category": "random-events",
+      "code_name": "Lake",
+      "steps": [
+        "The lake glows green.",
+        "Random chance.",
+        "Lake Mouth opens green beam — too close pulls you in and kills you."
+      ]
+    },
+    {
+      "id": "light-switches-off",
+      "category": "random-events",
+      "code_name": "Light Switches Off",
+      "steps": [
+        "Did I leave that on?",
+        "Random chance.",
+        "A light switch flips itself off."
+      ]
+    },
+    {
+      "id": "mannequins-at-uniform",
+      "category": "random-events",
+      "code_name": "Mannequins At Uniform",
+      "steps": [
+        "Gathering at Uniform.",
+        "Random chance.",
+        "All mannequins teleport in front of Uniform — one may float (radio tower hook victim)."
+      ]
+    },
+    {
+      "id": "meat-locker-thief",
+      "category": "random-events",
+      "code_name": "Meat Locker Thief",
+      "steps": [
+        "A hook went missing.",
+        "Random chance.",
+        "Meat hook vanishes — gore and blood on locker floor with crunch sound."
+      ]
+    },
+    {
+      "id": "meat-locker-thumper",
+      "category": "random-events",
+      "code_name": "Meat Locker Thumper",
+      "steps": [
+        "Who's there?",
+        "Random chance in Basement, worse when not watching locker.",
+        "Shadow entity thumps meat locker door; stops if you look. Once per occurrence."
+      ]
+    },
+    {
+      "id": "meat-rain",
+      "category": "random-events",
+      "code_name": "Meat Rain",
+      "steps": [
+        "IT'S RAINING FLESH",
+        "Random chance.",
+        "Roar then meat piles rain around you — clean up manually."
+      ]
+    },
+    {
+      "id": "possessed-kerfur",
+      "category": "random-events",
+      "code_name": "Possessed Kerfur",
+      "steps": [
+        "Your Kerfur just walked off.",
+        "Random chance while standard Kerfur is powered off.",
+        "Kerfur bolts to meat pile 200m out (~66.6% charge). 25% chance → Abandoned Kerfur burial instead."
+      ]
+    },
+    {
+      "id": "press-shift-to-run",
+      "category": "random-events",
+      "code_name": "Press Shift to Run",
+      "steps": [
+        "A helpful tutorial tip.",
+        "Random chance — even on title screen.",
+        "Popup tells you to press your Run key to sprint."
+      ]
+    },
+    {
+      "id": "red-phone-rings",
+      "category": "random-events",
+      "code_name": "Red Phone Rings",
+      "steps": [
+        "Hello..?",
+        "Random chance.",
+        "Red phone on download panel rings until you approach — can't answer. Meta Paranoia; works away from base."
+      ]
+    },
+    {
+      "id": "red-sky",
+      "category": "random-events",
+      "code_name": "Red Sky",
+      "steps": [
+        "The sky turns red.",
+        "Random chance.",
+        "Harsh red sky all day — sun/moon/stars still visible, lighting unchanged."
+      ]
+    },
+    {
+      "id": "rubber-duck",
+      "category": "random-events",
+      "code_name": "Rubber Duck",
+      "steps": [
+        "Quack.",
+        "Random chance.",
+        "Rubber duck spawns with quack — despawns unless stored in inventory/container."
+      ]
+    },
+    {
+      "id": "salt-heart",
+      "category": "random-events",
+      "code_name": "Salt Heart",
+      "steps": [
+        "A heart in salt.",
+        "Random chance.",
+        "Salt pile with human heart near Hole lodgings — real-world unsolved incident reference."
+      ]
+    },
+    {
+      "id": "satellites-move-on-own",
+      "category": "random-events",
+      "code_name": "Satellites Move On Their Own",
+      "steps": [
+        "The dishes are moving.",
+        "Random chance.",
+        "All satellites rotate together same direction — resets polarity if tracking; no Meta Paranoia."
+      ]
+    },
+    {
+      "id": "shooting-star",
+      "category": "random-events",
+      "code_name": "Shooting Star",
+      "steps": [
+        "Make a wish.",
+        "Random chance.",
+        "Single shooting star — same as Story meteor shower stars."
+      ]
+    },
+    {
+      "id": "skerfuro-random",
+      "category": "random-events",
+      "code_name": "Skerfuro Random",
+      "steps": [
+        "Where did Omega go?",
+        "Random chance with active Kerfur-Omega.",
+        "Omega stolen → flesh room on camera; Skerfuro at a random window. Check every window to end Meta Paranoia."
+      ]
+    },
+    {
+      "id": "sky-ufo",
+      "category": "random-events",
+      "code_name": "Sky Ufo",
+      "steps": [
+        "Barely visible in the distance.",
+        "Random chance — any gamemode.",
+        "Far Gray UFO drifts by. Looking that way triggers Meta Paranoia (can interrupt sleep cam)."
+      ]
+    },
+    {
+      "id": "sky-jellyfish-event",
+      "category": "random-events",
+      "code_name": "Sky Jellyfish",
+      "steps": [
+        "Pink shapes overhead.",
+        "Random chance at night.",
+        "Sky Jellyfish cross the map corner to corner — radar blips, no collision."
+      ]
+    },
+    {
+      "id": "stolen-radio-tower",
+      "category": "random-events",
+      "code_name": "Stolen Radio Tower",
+      "steps": [
+        "The tower is gone.",
+        "Random chance while not looking at radio tower.",
+        "Entire radio tower vanishes — real stolen-tower news reference."
+      ]
+    },
+    {
+      "id": "super-fog",
+      "category": "random-events",
+      "code_name": "Super Fog",
+      "steps": [
+        "In my restless dreams...",
+        "Random chance.",
+        "Thick forest fog + Meta Paranoia + one Thunder Wisp until event ends."
+      ]
+    },
+    {
+      "id": "toyota-corolla",
+      "category": "random-events",
+      "code_name": "Toyota Corolla",
+      "steps": [
+        "Insurance information time.",
+        "Random chance approaching any transformer.",
+        "Car rolls down slope with censored branding — troll faces under censors. Inert, vanishes later. GTA SA ghost car reference."
+      ]
+    },
+    {
+      "id": "tree-debris",
+      "category": "random-events",
+      "code_name": "Tree Debris",
+      "steps": [
+        "Something fell from the tree.",
+        "Random chance near trees/wood structures.",
+        "Drops stick, pinecone, light tube, explosive red tube, etc."
+      ]
+    },
+    {
+      "id": "kerfur-sleep-scare",
+      "category": "signal-events",
+      "code_name": "ker",
+      "steps": [
+        "Don't sleep on Omega.",
+        "Save signal ker, then sleep with Kerfur-Omega active.",
+        "Omega runs scary face at sleep cam → ragdoll wake. Waking early still ends in ragdoll."
+      ]
+    },
+    {
+      "id": "magnet-skeleton",
+      "category": "signal-events",
+      "code_name": "process",
+      "steps": [
+        "Save signal process.",
+        "outside TR1",
+        "Bloody skeleton + blood splatter + Alien Magnet outside TR1. Not edible. One-time per save."
+      ]
+    },
+    {
+      "id": "pink-beam-rozital-engine",
+      "category": "signal-events",
+      "code_name": "lifecrystal",
+      "steps": [
+        "lifecrystal",
+        "Process lifecrystal to level 3.",
+        "At night, a large purple/pink beam strikes near Uniform for ~30 seconds",
+        "At the impact site the Rozital engine activates — flies up, sparks violently, explodes, and leaves a magenta Argemia plush."
+      ]
+    },
+    {
+      "id": "shitting-duende-signal",
+      "category": "signal-events",
+      "code_name": "shitDuende",
+      "steps": [
+        "How about some privacy!?",
+        "Funny Rule on — random scan chance; save shitDuende.",
+        "Duende on your toilet; spotted directly → vanishes."
+      ]
+    },
+    {
+      "id": "shorts-ariral-teleport",
+      "category": "signal-events",
+      "code_name": "shortarirtp",
+      "steps": [
+        "A crash at the map edge.",
+        "After Day 30 — random scan for shortarirtp.",
+        "Massive crash, blue flash, power out, permanent radar dot between Yankee and Romeo — severed legs + Gravity Gun in wreckage."
+      ]
+    },
+    {
+      "id": "tardis-event",
+      "category": "signal-events",
+      "code_name": "tardis",
+      "steps": [
+        "A familiar blue box.",
+        "Save signal tardis.",
+        "TARDIS appears in front parking lot ~5–10 in-game minutes; event ~2 real minutes total."
+      ]
+    },
+    {
+      "id": "trifo-event",
+      "category": "signal-events",
+      "code_name": "trifo",
+      "steps": [
+        "Where is my golf cart?!",
+        "Save signal trifo.",
+        "Lights flicker; triangle UFO hovers base — blur + zoom effect. Basement breakers may flip."
+      ]
+    },
+    {
+      "id": "virus-event",
+      "category": "signal-events",
+      "code_name": "virus",
+      "steps": [
+        "CRITICAL ERROR!",
+        "Save signal virus.",
+        "All PCs show Petya-style skull screen; power down briefly; many servers need repair."
+      ]
+    },
+    {
+      "id": "zombie-deer-event",
+      "category": "signal-events",
+      "code_name": "deer",
+      "steps": [
+        "Yummers.",
+        "Process deer signal to Level 3.",
+        "Rotting deer on sidewalk; ghost deer stalks each night until corpse gone."
+      ]
+    },
+    {
+      "id": "the-evil-event",
+      "category": "signal-events",
+      "code_name": "evil",
+      "steps": [
+        "The worst ending.",
+        "Process evil to Level 3.",
+        "Limited time to destroy ALL copies everywhere or game over. Ariral email warns you. Selling via drone counts as destroyed. Success = +50 rep."
+      ]
+    },
+    {
+      "id": "skeleon-appears",
+      "category": "signal-events",
+      "code_name": "skeleton",
+      "steps": [
+        "HAPY HALOWEENER !1",
+        "Pre-0.8.1 Halloween mode — 13 jack-o-lanterns then play skeleton signal.",
+        "Game freezes; skull zooms on console with Halloween gifs."
+      ]
+    },
+    {
+      "id": "dream-base",
+      "category": "dreams",
+      "code_name": "Base Dream",
+      "steps": [
+        "Day 22+ — random chance while sleeping",
+        "Survive for 2 minutes or avoid falling through gaps in the geometry",
+        "You spawn in a warped, distorted version of the Alpha Root Base break room with jagged geometry and ghostly moans. The dream ends after 2 minutes or if you fall into the void."
+      ]
+    },
+    {
+      "id": "dream-boulder",
+      "category": "dreams",
+      "code_name": "Boulder Dream",
+      "steps": [
+        "Random chance while sleeping",
+        "Dodge the rolling boulders and stay on the slope for 60 seconds",
+        "You spawn on a steep incline with boulders rolling down that get faster over time. Winning restores hunger and stamina."
+      ]
+    },
+    {
+      "id": "dream-burger",
+      "category": "dreams",
+      "code_name": "Burger Dream",
+      "steps": [
+        "Random chance while sleeping",
+        "Collect all 10 glowing burgers within 2 minutes without falling off the platform",
+        "You spawn on a platform made of burgers with 10 floating glowing burgers scattered around. Winning grants the \"Burger dream\" achievement and restores hunger and stamina."
+      ]
+    },
+    {
+      "id": "dream-climbing",
+      "category": "dreams",
+      "code_name": "Climbing Dream",
+      "steps": [
+        "Random chance while sleeping",
+        "Climb the pillars and beams to reach the tower door before the water rises",
+        "Tall room with thin pillars, side beams, and rising water below. Vault onto beams with double-tap jump from good angles. Winning restores hunger and stamina."
+      ]
+    },
+    {
+      "id": "dream-flooding",
+      "category": "dreams",
+      "code_name": "Flooding Dream",
+      "steps": [
+        "Random chance while sleeping",
+        "Find the hidden exit door on a random wall within 60 seconds",
+        "Massive room with large walls and rising water. The exit is hidden on one wall each time. Winning restores hunger and stamina."
+      ]
+    },
+    {
+      "id": "dream-furfur",
+      "category": "dreams",
+      "code_name": "Furfur Dream",
+      "steps": [
+        "Guaranteed next dream after encountering Furfur (or force Furfur via deer skull ritual)",
+        "Nothing to do — the dream lasts only 6 seconds",
+        "You spawn on a small circular platform while four Furfurs rise up around you and stare. Ends automatically after 6 seconds."
+      ]
+    },
+    {
+      "id": "dream-hallway",
+      "category": "dreams",
+      "code_name": "Hallway Dream",
+      "steps": [
+        "Random chance while sleeping",
+        "Sprint to the exit door at the end of the hallway before the water catches you",
+        "Cramped hallway with water rushing in from behind. Winning restores hunger and stamina."
+      ]
+    },
+    {
+      "id": "dream-mannequin",
+      "category": "dreams",
+      "code_name": "Mannequin Dream",
+      "steps": [
+        "Random chance while sleeping",
+        "Avoid touching any shadow mannequins for 2 minutes — kite them around the room corners",
+        "Room with pillars and four side chambers spawning large shadowy mannequins that chase you. Winning grants the \"Mannequin dream\" achievement and restores hunger and stamina."
+      ]
+    },
+    {
+      "id": "dream-parkour",
+      "category": "dreams",
+      "code_name": "Parkour Dream",
+      "steps": [
+        "Random chance while sleeping",
+        "Jump between pillars to reach one of the corner exit doors within 2 minutes without falling in the water",
+        "You start on a pillar above a room full of pillars and water below, with an exit door on each corner platform. Winning restores hunger and stamina."
+      ]
+    },
+    {
+      "id": "dream-shed",
+      "category": "dreams",
+      "code_name": "Shed Dream",
+      "steps": [
+        "Random chance while sleeping",
+        "Wait outside the wooden shed for a few seconds",
+        "You spawn in a shed on a flat plain. A UFO arrives and abducts you shortly after you step outside."
+      ]
+    },
+    {
+      "id": "dream-work",
+      "category": "dreams",
+      "code_name": "Work Dream",
+      "steps": [
+        "Random chance while sleeping",
+        "Survive until the walls crush you, or clip through the moving walls to fall into the void and end early",
+        "Room with a table and items where the walls slowly close inward until everything is crushed. The dream ends after about 1 minute."
+      ]
+    },
+    {
+      "id": "howling-grass",
+      "category": "player-activated",
+      "code_name": "Howling Grass",
+      "steps": [
+        "Howling Grass",
+        "Step on grass at X:-318 / Y:-122 — not Ambience mode.",
+        "A loud ghostly howl plays in the distance. Resets on reload."
+      ]
+    },
+    {
+      "id": "howling-hoofprints",
+      "category": "player-activated",
+      "code_name": "Howling Hoofprints",
+      "steps": [
+        "Howling Hoofprints",
+        "Walk over the hoofprints inside the Abandoned Shack.",
+        "A howl plays outside the shack (Half-Life 2 Ravenholm sound). Does not reset on save/load."
+      ]
+    },
+    {
+      "id": "invalid-email",
+      "category": "player-activated",
+      "code_name": "Invalid Email",
+      "steps": [
+        "Invalid Email",
+        "Random chance when sending out a full drive box with any signal.",
+        "You receive a blank email from an ASO employee — a corrupted/failed transmission feature."
+      ]
+    },
+    {
+      "id": "meat-locker-knocker",
+      "category": "player-activated",
+      "code_name": "Meat Locker Knocker",
+      "steps": [
+        "Meat Locker Knocker",
+        "Obstruct the Basement meat locker door, then break line of sight to the locker window.",
+        "Something knocks from inside, shaking the door and any objects blocking it. Knocking speeds up until the obstruction is cleared; pauses if you look at the locker."
+      ]
+    },
+    {
+      "id": "mystery-footprints",
+      "category": "player-activated",
+      "code_name": "Mystery Footprints",
+      "steps": [
+        "Mystery Footprints",
+        "Interact with the hidden yellow note under MREs in the Alpha Root vent hideout.",
+        "Footprints spawn beside the front camera pole outside base until the next load. Can be triggered again by interacting with the note."
+      ]
+    },
+    {
+      "id": "restocker",
+      "category": "player-activated",
+      "code_name": "Restocker",
+      "steps": [
+        "Restocker",
+        "Buy every item from a vending machine, then leave its line of sight.",
+        "A black humanoid figure briefly appears in front of the machine, then vanishes as the lights flicker and the machine is fully refilled."
+      ]
+    },
+    {
+      "id": "skeleton-in-chair",
+      "category": "player-activated",
+      "code_name": "Skeleton In Chair",
+      "steps": [
+        "Skeleton in Chair",
+        "Walk over X:121.50 / Y:-246.75.",
+        "A full skeleton appears sitting in your swivel chair. Bones stay in place until disturbed and disappear on reload."
+      ]
+    },
+    {
+      "id": "gay-baby-jail",
+      "category": "player-activated",
+      "code_name": "Gay Baby Jail",
+      "steps": [
+        "Gay Baby Jail",
+        "Use Debug TP 10 times in quick succession, or clip through world geometry with a Paper Sheet.",
+        "Teleported to a prison cell with a 2 real-minute wait before you can leave. Pause menu is locked. Erie plush visible on the toilet in the adjacent cell."
+      ]
+    },
+    {
+      "id": "i-know-what-you-are",
+      "category": "player-activated",
+      "code_name": "I Know What You Are",
+      "steps": [
+        "I Know What You Are",
+        "Open the title screen or pause menu while the Patreon list is unavailable (e.g. no internet).",
+        "A low-quality \"i know what you are\" meme appears in the top-left corner."
+      ]
+    },
+    {
+      "id": "rep-alien-cart",
+      "category": "ariral-reputation",
+      "code_name": "Alien Cart",
+      "steps": [
+        "A cart rolls down the hill.",
+        "Random reputation event — stand at computer table.",
+        "Wooden cart with paper alien rolls outside fence. Meta Paranoia until triggered at PC."
+      ]
+    },
+    {
+      "id": "rep-alien-catapult",
+      "category": "ariral-reputation",
+      "code_name": "Alien Catapult",
+      "steps": [
+        "Something in the garage.",
+        "Reputation event at computer table.",
+        "Gray alien sound → paper alien launched from catapult in garage. Harmless."
+      ]
+    },
+    {
+      "id": "rep-atv-explodes",
+      "category": "ariral-reputation",
+      "code_name": "Atv Explodes",
+      "steps": [
+        "Your ride may be rigged.",
+        "Random reputation event (mean tiers).",
+        "ATV set to 0 health and explodes when you try to drive."
+      ]
+    },
+    {
+      "id": "rep-atv-joyride",
+      "category": "ariral-reputation",
+      "code_name": "ATV Joyride",
+      "steps": [
+        "The Arirals take the ATV for a joyride If π",
+        "fill the tank to 314.0",
+        "crash it into the river"
+      ]
+    },
+    {
+      "id": "rep-atv-refill",
+      "category": "ariral-reputation",
+      "code_name": "Atv Refill",
+      "steps": [
+        "Free gas.",
+        "Random reputation event (good tiers).",
+        "Ariral fills ATV to 200 fuel (double cap) — drops gas can with 100 fuel."
+      ]
+    },
+    {
+      "id": "rep-atv-repair",
+      "category": "ariral-reputation",
+      "code_name": "Atv Repair",
+      "steps": [
+        "Free repairs.",
+        "Random reputation event (good tiers).",
+        "Ariral repairs ATV to 200 health — drops toolbox and flees."
+      ]
+    },
+    {
+      "id": "rep-base-graffiti",
+      "category": "ariral-reputation",
+      "code_name": "Base Graffiti",
+      "steps": [
+        "Chalk art on the base.",
+        "Random reputation event.",
+        "Black chalk graffiti — void-eyed Ariral among possible images."
+      ]
+    },
+    {
+      "id": "rep-base-graffiti-random",
+      "category": "ariral-reputation",
+      "code_name": "Base Graffiti Random",
+      "steps": [
+        "More chalk surprises.",
+        "Random reputation event.",
+        "Random graffiti: shrimp burger, Ariral in bush, eating mushroom, etc."
+      ]
+    },
+    {
+      "id": "rep-base-reorganizing",
+      "category": "ariral-reputation",
+      "code_name": "Base Reorganizing",
+      "steps": [
+        "Someone rearranged your stuff.",
+        "Random reputation event.",
+        "Arirals reorganize furniture and props in base."
+      ]
+    },
+    {
+      "id": "rep-bed-relocation",
+      "category": "ariral-reputation",
+      "code_name": "Bed Relocation",
+      "steps": [
+        "Wake up somewhere else.",
+        "Reputation event while sleeping.",
+        "Wake at X:-601.6 / Y:-367.0 near CR3 — mattress may vanish."
+      ]
+    },
+    {
+      "id": "rep-bed-shrimp",
+      "category": "ariral-reputation",
+      "code_name": "Bed Shrimp",
+      "steps": [
+        "Shrimp on your bed.",
+        "Random while sleeping.",
+        "Blue raw shrimp left on bed/sleeping bag (balcony if bag). Repeats."
+      ]
+    },
+    {
+      "id": "rep-bedroom-vent-break-in",
+      "category": "ariral-reputation",
+      "code_name": "Bedroom Vent Break In",
+      "steps": [
+        "Kick from the vent.",
+        "Reputation event in Bedroom.",
+        "Ariral kicks opposite vent and retreats."
+      ]
+    },
+    {
+      "id": "rep-blue-lights-prank",
+      "category": "ariral-reputation",
+      "code_name": "Blue Lights Prank",
+      "steps": [
+        "Blue glow everywhere.",
+        "Random reputation event.",
+        "Power off; blue light tubes in vents, basement, garage roof, second floor — radar entities."
+      ]
+    },
+    {
+      "id": "rep-bomb-present",
+      "category": "ariral-reputation",
+      "code_name": "Bomb Present",
+      "steps": [
+        "A box at the door.",
+        "Random mean-tier event.",
+        "Cardboard box labelled Open at front door — explodes if opened."
+      ]
+    },
+    {
+      "id": "rep-console-breach",
+      "category": "ariral-reputation",
+      "code_name": "Console Breach",
+      "steps": [
+        "Remote hack attempt.",
+        "Random reputation event.",
+        "Console spam about reactor/core — fails. Meta Paranoia during."
+      ]
+    },
+    {
+      "id": "rep-cookies-present",
+      "category": "ariral-reputation",
+      "code_name": "Cookies Present",
+      "steps": [
+        "Open me.",
+        "Random good-tier event.",
+        "Box at front door with 48 cookies inside."
+      ]
+    },
+    {
+      "id": "rep-door-trash-piles",
+      "category": "ariral-reputation",
+      "code_name": "Door Trash Piles",
+      "steps": [
+        "Trash at every door.",
+        "Random reputation event.",
+        "Trash clumps at front door and garage inner door."
+      ]
+    },
+    {
+      "id": "rep-drives-gift",
+      "category": "ariral-reputation",
+      "code_name": "Drives Gift",
+      "steps": [
+        "Free drives.",
+        "Random reputation event.",
+        "4 empty drives thrown near base — safe to use."
+      ]
+    },
+    {
+      "id": "rep-egg-ditch",
+      "category": "ariral-reputation",
+      "code_name": "Egg Ditch",
+      "steps": [
+        "Knock at the door.",
+        "Random reputation event.",
+        "Knocking → large egg on doorstep."
+      ]
+    },
+    {
+      "id": "rep-fake-drives",
+      "category": "ariral-reputation",
+      "code_name": "Fake Drives",
+      "steps": [
+        "Don't trust these drives.",
+        "Random reputation event.",
+        "4–5 drives thrown around base — explode on any file operation."
+      ]
+    },
+    {
+      "id": "rep-food-gift",
+      "category": "ariral-reputation",
+      "code_name": "Food Gift",
+      "steps": [
+        "Food from above.",
+        "Random reputation event.",
+        "5–6 food items thrown into signal room, garage hole, or balcony."
+      ]
+    },
+    {
+      "id": "rep-food-gift-outside",
+      "category": "ariral-reputation",
+      "code_name": "Food Gift Outside",
+      "steps": [
+        "A snack nearby.",
+        "Random when low on food.",
+        "Ariral leaves food + light tube near you."
+      ]
+    },
+    {
+      "id": "rep-gas-can-prank",
+      "category": "ariral-reputation",
+      "code_name": "Gas Can Prank",
+      "steps": [
+        "Burning cans around base.",
+        "Random mean-tier event.",
+        "Lit gas cans placed around base."
+      ]
+    },
+    {
+      "id": "rep-goblin-cutouts",
+      "category": "ariral-reputation",
+      "code_name": "Goblin Cutouts",
+      "steps": [
+        "Goblins at Uniform.",
+        "Reputation event — Uniform server interaction.",
+        "Uniform goes down; footsteps on stairs; two Hopskinville Goblin cutouts left outside server room."
+      ]
+    },
+    {
+      "id": "rep-medkit-gift",
+      "category": "ariral-reputation",
+      "code_name": "Medkit Gift",
+      "steps": [
+        "GET WELL.",
+        "Random when health low.",
+        "Medkit on bed with note GET WELL."
+      ]
+    },
+    {
+      "id": "rep-noise-maker",
+      "category": "ariral-reputation",
+      "code_name": "Noise Maker",
+      "steps": [
+        "Gray alien noises.",
+        "Random reputation event.",
+        "Ariral walks around making alien sounds. Meta Paranoia."
+      ]
+    },
+    {
+      "id": "rep-oilslicks",
+      "category": "ariral-reputation",
+      "code_name": "Oilslicks",
+      "steps": [
+        "Slippery entrance.",
+        "Random reputation event.",
+        "Oil slicks at front door, garage, balcony — slip and fall."
+      ]
+    },
+    {
+      "id": "rep-poisoned-food",
+      "category": "ariral-reputation",
+      "code_name": "Poisoned Food",
+      "steps": [
+        "Don't eat that.",
+        "Random reputation event.",
+        "Poisoned shrimp packs, burgers, MREs, etc. left around."
+      ]
+    },
+    {
+      "id": "rep-reactor-restart",
+      "category": "ariral-reputation",
+      "code_name": "Reactor Restart",
+      "steps": [
+        "Check the tower breakers.",
+        "Random reputation event.",
+        "Email from Dr. Bao; front door broken; 3 alien mannequins at garage; radio tower disconnected temporarily."
+      ]
+    },
+    {
+      "id": "rep-sleep-feeding",
+      "category": "ariral-reputation",
+      "code_name": "Sleep Feeding",
+      "steps": [
+        "Spoon-fed while asleep.",
+        "Sleep with hunger below 50.",
+        "Ariral feeds you unknown substance until full — leaves container + spoon. Repeats."
+      ]
+    },
+    {
+      "id": "rep-tacks",
+      "category": "ariral-reputation",
+      "code_name": "Tacks",
+      "steps": [
+        "Watch your step.",
+        "Random mean-tier event.",
+        "Tacks in parking lot, paths, and Signal Lab floor — damage and ragdoll."
+      ]
+    },
+    {
+      "id": "rep-throwing-rocks",
+      "category": "ariral-reputation",
+      "code_name": "Throwing Rocks",
+      "steps": [
+        "Rocks at the window.",
+        "Reputation event at computer table.",
+        "Arirals throw rocks at center window; resume if you return to PC after chasing them out."
+      ]
+    },
+    {
+      "id": "rep-treehouse-kidnapping",
+      "category": "ariral-reputation",
+      "code_name": "Treehouse Kidnapping",
+      "steps": [
+        "Wake up at the treehouse.",
+        "Reputation event while sleeping.",
+        "Spawn at Ariral Treehouse — can happen before it's built."
+      ]
+    },
+    {
+      "id": "rep-vaccine",
+      "category": "ariral-reputation",
+      "code_name": "Vaccine",
+      "steps": [
+        "Body improvement.",
+        "Random reputation event.",
+        "Arirals give vaccine with note: USE IMPROVE BODY BETTER FUTURE ME PROMISE USE."
+      ]
+    },
+    {
+      "id": "rep-vent-assault",
+      "category": "ariral-reputation",
+      "code_name": "Vent Assault",
+      "steps": [
+        "Drop from the vents.",
+        "Reputation event in Signal Processing room.",
+        "Ariral crawls vents, drops in, won't leave until they hit you. Vent stays open."
+      ]
+    },
+    {
+      "id": "ending-the-evil",
+      "category": "endings",
+      "code_name": "The Evil Ending",
+      "steps": [
+        "The worst ending.",
+        "Process evil to L3, fail to delete all copies within 12 real minutes.",
+        "World consumed — black/red flash then GAME OVER. Save not deleted."
+      ]
+    },
+    {
+      "id": "ending-bad-sun",
+      "category": "endings",
+      "code_name": "Bad Sun Ending",
+      "steps": [
+        "You have seen everything.",
+        "Die from sunlight during Bad Sun event.",
+        "Liquefied — unique game over. Also unlocks achievement. See Real-Life Time for surviving the event."
+      ]
+    },
+    {
+      "id": "ending-rufus-removed",
+      "category": "endings",
+      "code_name": "Rufus Removed Ending",
+      "steps": [
+        "Removed before Demo 0.6.2",
+        "Get caught by Rufus or Thiccfus for a meme game over: \"skill issue get fukced lmao\".",
+        "Use console gooseworx.rufus in modern versions instead."
+      ]
+    },
+    {
+      "id": "cmd-alien",
+      "category": "console-commands",
+      "code_name": "alien",
+      "steps": [
+        "Type alien or summon_alien in the base console",
+        "Spawns wooden alien cutout(s) behind random door(s) in base or at satellites."
+      ]
+    },
+    {
+      "id": "cmd-argemwell",
+      "category": "console-commands",
+      "code_name": "argemwell",
+      "steps": [
+        "Type argemwell in console",
+        "Argemwell spawns at a random map point",
+        "Near it you hear The Penis (Eek!). Can be pet (meows, purrs when held).",
+        "Pet too much → explodes into absurd amount of shrimp"
+      ]
+    },
+    {
+      "id": "cmd-bingus",
+      "category": "console-commands",
+      "code_name": "bingus",
+      "steps": [
+        "ASCII cat.",
+        "Type bingus in console.",
+        "ASCII Bingus appears on screen."
+      ]
+    },
+    {
+      "id": "cmd-eriewell",
+      "category": "console-commands",
+      "code_name": "eriewell",
+      "steps": [
+        "Type eriewell in console",
+        "Eriewell spawns randomly. Nearby you hear Australia by Benny Hawes.",
+        "Pet → says \"mup\"; hold/drop → \"Hey cutie\".",
+        "Pet too much → explodes into cheese wheels.",
+        "Slam into ground → unique gore pile that reforms into Eriewell."
+      ]
+    },
+    {
+      "id": "cmd-gnarpwell",
+      "category": "console-commands",
+      "code_name": "gnarpwell",
+      "steps": [
+        "Type gnarpwell in console",
+        "Gnarpwell spawns randomly",
+        "Nearby they sing a gnarpified Bach Cello Suite No. 1 cover.",
+        "Pet too much → explodes like Kerfur. Slam into ground → metal trash pile."
+      ]
+    },
+    {
+      "id": "cmd-gooseworx-rufus",
+      "category": "console-commands",
+      "code_name": "gooseworx.rufus",
+      "steps": [
+        "Type gooseworx.rufus (Funny setting required)",
+        "Rufus chases you with eerie music",
+        "Remove with explosions or rufus.fuckoff",
+        "Killing without command unlocks \"Rufus No More\" achievement + Gooseworx Plush in shop. Drops Thiccfus plush."
+      ]
+    },
+    {
+      "id": "cmd-gooseworx-thiccfus",
+      "category": "console-commands",
+      "code_name": "gooseworx.thiccfus",
+      "steps": [
+        "Type gooseworx.thiccfus in console",
+        "Rufus variant chases you with slowed eerie music",
+        "Remove with explosions or rufus.fuckoff.",
+        "Extremely slow, gets stuck on geometry"
+      ]
+    },
+    {
+      "id": "cmd-llama-saatana",
+      "category": "console-commands",
+      "code_name": "llama.saatana",
+      "steps": [
+        "Type llama.saatana in console.",
+        "A rainbow llama plush spawns behind you in the satellite server room.",
+        "Approaching it triggers a loud jumpscare scream.",
+        "Running the command again returns \"Llama soul is out there\"."
+      ]
+    },
+    {
+      "id": "cmd-madness-combat",
+      "category": "console-commands",
+      "code_name": "madness.combat",
+      "steps": [
+        "Type madness.combat in console between 18:00–07:00 during a Red Sky event",
+        "Kill counter appears",
+        "Grunts spawn and attack until Red Sky ends.",
+        "Score popup with personal best at end. Outside Red Sky: >It is not the time."
+      ]
+    },
+    {
+      "id": "cmd-maxwell",
+      "category": "console-commands",
+      "code_name": "maxwell",
+      "steps": [
+        "Type maxwell in console",
+        "Maxwell spawns at a random point.",
+        "Nearby you hear an edit of Move Forward by Kevin MacLeod",
+        "Pet too much → skeleton and explode"
       ]
     }
   ],
@@ -1646,6 +3211,43 @@
 
     app.querySelectorAll('.step-reveal').forEach(initRevealSlider);
 
+    const searchInput = document.getElementById('search');
+
+    function applySearch() {
+      const q = searchInput.value.trim().toLowerCase();
+
+      for (const event of app.querySelectorAll('.event')) {
+        if (!q) {
+          event.style.display = '';
+          for (const step of event.querySelectorAll('.step')) {
+            step.style.display = '';
+          }
+          continue;
+        }
+
+        const title = (event.dataset.search || '').toLowerCase();
+        const titleMatch = title.includes(q);
+        const anyHintMatch = [...event.querySelectorAll('.step')].some((step) =>
+          step.querySelector('.step-content').textContent.toLowerCase().includes(q)
+        );
+        const showEvent = titleMatch || anyHintMatch;
+
+        event.style.display = showEvent ? '' : 'none';
+        for (const step of event.querySelectorAll('.step')) {
+          step.style.display = showEvent ? '' : 'none';
+        }
+      }
+
+      for (const category of app.querySelectorAll('.category')) {
+        const anyEventVisible = [...category.querySelectorAll('.event')].some(
+          (e) => e.style.display !== 'none'
+        );
+        category.style.display = anyEventVisible ? '' : 'none';
+      }
+    }
+
+    searchInput.addEventListener('input', applySearch);
+
     function renderRevealBlock(label, contentHtml) {
       return `
         <li class="step">
@@ -1668,7 +3270,7 @@
         .join('');
 
       return `
-        <article class="event" id="${item.id}">
+        <article class="event" id="${item.id}" data-search="${escapeHtml(item.code_name)}">
           <div class="event-header">
             <span class="event-title">${escapeHtml(item.code_name)}</span>
             <span class="event-meta">
